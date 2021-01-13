@@ -15,7 +15,6 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {TEST} from "@env"
 import {
   Header,
   LearnMoreLinks,
@@ -23,13 +22,27 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { ThemeProvider } from 'styled-components';
+
+import {Box} from './src/components/common'
+import {TEST} from "@env"
+import theme from './theme';
 
 const App= ()  => {
+  const isLog = true;
   console.log(TEST);
   return (
     <>
+    <ThemeProvider theme={theme}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
+        <Box
+         mb={10}
+         bg={isLog?'blue':'accent'}
+         flexDirection={'row'}
+         height={50}
+       
+        />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
@@ -69,7 +82,8 @@ const App= ()  => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+   </ThemeProvider>
+   </>
   );
 };
 
