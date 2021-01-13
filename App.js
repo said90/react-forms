@@ -15,7 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-
+import {TEST} from "@env"
 import {
   Header,
   LearnMoreLinks,
@@ -25,6 +25,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App= ()  => {
+  console.log(TEST);
   return (
     <>
       <StatusBar barStyle="dark-content" />
