@@ -10,7 +10,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {ThemeProvider} from 'styled-components';
-import Login from './src/screens/user/Login';
+import AppNavigator from './src/navigation/AppNavigator';
 
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LoginScreen />
+        <AppNavigator />
       </ThemeProvider>
     </>
   );
