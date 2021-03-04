@@ -7,17 +7,34 @@ import AuditHeaderScreen from '../screens/audits/AuditHeaderScreen';
 import AuditQuestionListScreen from '../screens/audits/AuditQuestionListScreen';
 import AuditQuestionScreen from '../screens/audits/AuditQuestionScreen';
 
-const LoginStackNavigator = createStackNavigator();
+const MainStackNavigator = createStackNavigator();
 
-export const LoginNavigator = () => {
+export const MainNavigator = () => {
   return (
-    <LoginStackNavigator.Navigator>
-      <LoginStackNavigator.Screen
+    <MainStackNavigator.Navigator>
+      <MainStackNavigator.Screen
         options={{headerShown: false}}
         name="Login"
         component={LoginScreen}
       />
-    </LoginStackNavigator.Navigator>
+      <MainStackNavigator.Screen
+        options={{headerShown: false}}
+        name="AuditListScreen"
+        component={AuditListScreen}
+      />
+      <MainStackNavigator.Screen
+        name="AuditHeaderScreen"
+        component={AuditHeaderScreen}
+      />
+      <MainStackNavigator.Screen
+        name="AuditQuestionListScreen"
+        component={AuditQuestionListScreen}
+      />
+      <MainStackNavigator.Screen
+        name="AuditQuestionScreen"
+        component={AuditQuestionScreen}
+      />
+    </MainStackNavigator.Navigator>
   );
 };
 

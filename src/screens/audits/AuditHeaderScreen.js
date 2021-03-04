@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text} from 'react-native';
 import {Box} from '../../components/common';
 
 const AuditHeaderScreen = (props) => {
   return (
     <Box styles={styles.screen}>
       <Text> Audit Header Screen</Text>
+      <Button
+        title="To audit Audit Question Screen"
+        onPress={() => {
+          props.navigation.navigate('AuditQuestionScreen');
+        }}
+      />
     </Box>
   );
 };

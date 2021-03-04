@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {
   ImageBackground,
   StatusBar,
@@ -10,10 +11,10 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
-
+import SQLite from 'react-native-sqlite-storage';
 import {authorize} from 'react-native-app-auth';
 import {Box} from '../../components/common';
-import {BASE_URL} from '@env';
+import {BASE_URL, APP_ID} from '@env';
 
 const AuthConfig = {
   appId: '9cc2062b-58d6-4144-9a7b-147dfb9c325a',
@@ -34,20 +35,44 @@ const config = {
   },
 };
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [authToken, setAuthToken] = useState();
+
   const [error, setError] = useState();
+  const db = SQLite.openDatabase({
+    name: 'db.sqlite',
+    location: 'default',
+  });
+  const auditList = useSelector((state) => state.audit);
 
   useEffect(() => {
     if (error) {
       Alert.alert('An error ocurred', error, [{text: 'OK'}]);
     }
+    SQLite.DEBUG(true);
+    SQLite.enablePromise(true);
   }, [error]);
   const loginHandler = async () => {
     setIsLoading(true);
     try {
+      console.log('loggg', db);
+
+      (await db).transaction((tx) => {
+        tx.executeSql(
+          'SELECT name, hired FROM colleagues ORDER BY hired ASC',
+          [],
+          (ts, result) => {
+            console.log('resultado del select', result);
+          },
+        );
+      });
+
+      console.log('props', props);
       const result = await authorize(config);
       console.log('LOG URL', BASE_URL);
+      props.navigation.navigate('AuditListScreen');
+
       await axios
         .post(
           `http://192.168.1.2:54888/api/auth/azure`,

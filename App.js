@@ -11,13 +11,12 @@ import {StyleSheet} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {ThemeProvider} from 'styled-components';
 import AppNavigator from './src/navigation/AppNavigator';
-import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import auditReducer from './src/redux/reducers';
-
-const store = createStore(auditReducer);
+import configStore from './src/redux/store/configStore';
 
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+
+const store = configStore();
 
 import theme from './theme';
 const App = () => {
